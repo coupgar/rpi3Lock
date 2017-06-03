@@ -11,7 +11,7 @@ var AuthenticateCharacteristic = function() {
     descriptors: [
       new bleno.Descriptor({
         uuid: '2901',
-        value: 'AUthenticate user by userid and notify user done authenticate.'
+        value: 'userID must > 4 bytes'
       })
     ]
   });
@@ -24,17 +24,17 @@ AuthenticateCharacteristic.prototype.onWriteRequest = function(data, offset, wit
   if (offset) {
     callback(this.RESULT_ATTR_NOT_LONG);
   }
-  else if (data.length !== 4) {
+  else if (data.length <= 4) {
     callback(this.RESULT_INVALID_ATTRIBUTE_LENGTH);
   }
   else {
     var userID = data.toString();
     //authenticate here
-    console.log('receive userID value' +
+    console.log('receive userID value ' +
       userID
     );
     var self = this;
-    self.updateValueCallback(data);
+    // self.updateValueCallback(data);
     callback(this.RESULT_SUCCESS);
   }
 };

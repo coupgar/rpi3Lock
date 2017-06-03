@@ -31,11 +31,11 @@ OpenDoorCharacteristic.prototype.onWriteRequest = function(data, offset, without
   else {
     var shouldOpenDoor = data.readUInt8(0);
     //open door here
-    console.log('receive userID value' +
+    console.log('receive open door action ' +
       shouldOpenDoor
     );
     var self = this;
-    self.updateValueCallback(data);
+    // self.updateValueCallback(data);
     callback(this.RESULT_SUCCESS);
   }
 };
